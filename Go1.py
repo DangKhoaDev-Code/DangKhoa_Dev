@@ -56,32 +56,143 @@ from random import randint
 from pystyle import Colors, Colorate
 import uuid, re
 from bs4 import BeautifulSoup
-def banner():
- os.system("cls" if os.name == "nt" else "clear")
- banner = f"""
-╔═══════════════════════════════════════════════════════════════╗
-║   ████████╗███╗   ███╗  ██╗  ███╗  ██╗██████╗ ██╗  ██╗  ██╗   ║
-║   ╚══██╔══╝████╗ ████║  ╚═╝  ████╗ ██║██╔══██╗██║ ██╔╝  ██║   ║
-║      ██║   ██╔████╔██║       ██╔██╗██║██║  ██║█████═╝   ██║   ║
-║      ██║   ██║╚██╔╝██║       ██║╚████║██║  ██║██╔═██╗   ╚═╝   ║
-║      ██║   ██║ ╚═╝ ██║  ██╗  ██║ ╚███║██████╔╝██║ ╚██╗  ██╗   ║
-║      ╚═╝   ╚═╝     ╚═╝  ╚═╝  ╚═╝  ╚══╝╚═════╝ ╚═╝  ╚═╝  ╚═╝   ║
-╚═══════════════════════════════════════════════════════════════╝
- 
+import os, sys, time, math, random, colorsys
 
-NGUYỄN ĐĂNG KHOA
-_________________________________________________________________
-NHÓM ZALO : https://zalo.me/g/wyboil196
-_________________________________________________________________
-Kênh YouTube Share Tool  : 
-https://www.youtube.com/channel/UCGJmaIZ_JbAwoOrHeBZru6A
+# ────────── KÍCH HOẠT ANSI (Windows) ──────────
+if os.name == "nt":
+    import ctypes
+    kernel32 = ctypes.windll.kernel32
+    ENABLE_VT = 0x0004
+    handle = kernel32.GetStdHandle(-11)  # STD_OUTPUT_HANDLE = -11
+    mode = ctypes.c_ulong()
+    if kernel32.GetConsoleMode(handle, ctypes.byref(mode)):
+        kernel32.SetConsoleMode(handle, mode.value | ENABLE_VT)
 
-_________________________________________________________________
+# ────────── HÀM TIỆN ÍCH ──────────
+def hsv2rgb(h, s, v): return colorsys.hsv_to_rgb(h, s, v)
 
+def rgb_to_ansi(r, g, b):
+    return 16 + (36 * round(r * 5)) + (6 * round(g * 5)) + round(b * 5)
+
+def pastel_rainbow(length, offset=0, bright=0.95, sat=0.42, phase=0):
+    return [
+        rgb_to_ansi(*hsv2rgb(((i + offset) / (length * 1.2) + phase) % 1, sat, bright))
+        for i in range(length)
+    ]
+
+def gradient_line(text, colors, sweep=None):
+    out = []
+    for i, ch in enumerate(text):
+        c = colors[i % len(colors)]
+        if sweep is not None and abs(i - sweep) < 3:
+            out.append(f"\033[1m\033[38;5;{c}m{ch}\033[0m")
+        else:
+            out.append(f"\033[38;5;{c}m{ch}")
+    return "".join(out) + "\033[0m"
+
+def render_frame(f):
+    pulse = 0.5 + 0.5 * math.sin(f * 0.03)
+    bright = 0.9 + 0.1 * pulse
+    sat    = 0.38 + 0.08 * pulse
+    sweep  = int((math.sin(f * 0.05) + 1) * max_len // 2)
+    phase  = math.sin(f * 0.025) * .25
+
+    lines = []
+    for idx, raw in enumerate(logo):
+        shift = f + idx * .6
+        colors = pastel_rainbow(len(raw), shift, bright, sat, phase)
+        lines.append(gradient_line(raw, colors, sweep))
+    return lines
+
+def center_text(text, width):
+    return text.center(width)
+
+# ────────── LOGO ASCII ──────────
+logo = [
+    "╔═══════════════════════════════════════════════════════════════╗",
+    "║   ████████╗███╗   ███╗  ██╗  ███╗  ██╗██████╗ ██╗  ██╗  ██╗   ║",
+    "║   ╚══██╔══╝████╗ ████║  ╚═╝  ████╗ ██║██╔══██╗██║ ██╔╝  ██║   ║",
+    "║      ██║   ██╔████╔██║       ██╔██╗██║██║  ██║█████═╝   ██║   ║",
+    "║      ██║   ██║╚██╔╝██║       ██║╚████║██║  ██║██╔═██╗   ╚═╝   ║",
+    "║      ██║   ██║ ╚═╝ ██║  ██╗  ██║ ╚███║██████╔╝██║ ╚██╗  ██╗   ║",
+    "║      ╚═╝   ╚═╝     ╚═╝  ╚═╝  ╚═╝  ╚══╝╚═════╝ ╚═╝  ╚═╝  ╚═╝   ║",
+    "╚═══════════════════════════════════════════════════════════════╝"
+]
+max_len   = max(len(l) for l in logo)
+logo_h    = len(logo)
+duration  = 3          # giây chạy
+delay     = 0.06
+frames    = int(duration / delay)
+offset    = random.randint(0, 3)
+
+# ────────── BANNER SETUP ──────────
+banner_width = max_len + 4
+title = "[>_<] NGUYENDANGKHOA /// DANGKHOA_DEV"
+footer = "YOUTOBE SHARE TOOL :  https://www.youtube.com/channel/UCGJmaIZ_JbAwoOrHeBZru6A"
+start_message = "NHÓM ZALO : https://zalo.me/g/wyboil196"
+end_message = """ 
+[>_<] NGUYENDANGKHOA                          source by DangKhoa_Dev
+______________________________________________________________________
+NHÓM ZALO : https://zalo.me/g/wyboil196 
+______________________________________________________________________
+SHARE TOOL :  https://www.youtube.com/channel/UCGJmaIZ_JbAwoOrHeBZru6A
+______________________________________________________________________
 """
+# ────────── IN BANNER ──────────
+# Clear screen
+print("\033[2J\033[H", end="")
 
+# Print title
+title_colors = pastel_rainbow(len(title), offset)
+print(center_text(gradient_line(title, title_colors), banner_width))
 
- for X in banner:
+# Print top border
+border = "═" * (banner_width - 2)
+print(f"╔{border}╗")
+
+# Print initial logo
+first = render_frame(offset)
+for line in first:
+    print(f"║ {line.ljust(max_len)} ║")
+
+# Print bottom border
+print(f"╚{border}╝")
+
+# Print start message
+start_colors = pastel_rainbow(len(start_message), offset)
+print(center_text(gradient_line(start_message, start_colors), banner_width), flush=True)
+
+# ────────── VÒNG LẶP ANIMATION ──────────
+for f in range(1, frames):
+    time.sleep(delay)
+    # Move cursor to start of logo
+    sys.stdout.write(f"\033[{logo_h + 2}F")
+    # Print top border
+    sys.stdout.write(f"╔{border}╗\n")
+    # Print animated logo
+    for line in render_frame(f + offset):
+        sys.stdout.write(f"║ {line.ljust(max_len)} ║\n")
+    # Print bottom border
+    sys.stdout.write(f"╚{border}╝\n")
+    sys.stdout.flush()
+
+# ────────── KẾT THÚC BANNER & CHUYỂN SANG API ──────────
+time.sleep(delay)
+# Clear below logo
+sys.stdout.write(f"\033[{logo_h + 2}F\033[J")
+# Reprint title
+print(center_text(gradient_line(title, title_colors), banner_width))
+# Reprint top border
+print(f"╔{border}╗")
+# Print final frame
+for line in render_frame(frames + offset):
+    print(f"║ {line.ljust(max_len)} ║")
+# Reprint bottom border
+print(f"╚{border}╝")
+# Print transition message
+end_colors = pastel_rainbow(len(end_message), offset)
+print(center_text(gradient_line(end_message, end_colors), banner_width))
+def banner():
   sys.stdout.write(X)
   sys.stdout.flush() 
   sleep(0.00125)
@@ -384,9 +495,9 @@ def main():
 	
 	while True:
 		if os.path.exists('Cookie_FB.txt'):
-			print('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập [\033[1;33m1\033[1;32m] Sử Dụng Cookie Facebook Đã Lưu ')
-			print('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập [\033[1;33m2\033[1;32m] Nhập Cookie Facebook Mới')
-			chon = input('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mVui Lòng Nhập:\033[1;33m ')
+			print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập [\033[1;33m1\033[1;32m] Sử Dụng Cookie Facebook Đã Lưu ')
+			print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập [\033[1;33m2\033[1;32m] Nhập Cookie Facebook Mới')
+			chon = input('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mVui Lòng Nhập:\033[1;33m ')
 			if chon == '1':
 				print('\033[1;32mĐang Lấy Dữ Liệu Đã Lưu');sleep(1)
 				with open('Cookie_FB.txt', 'r') as f:
