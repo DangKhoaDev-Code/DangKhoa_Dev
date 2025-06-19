@@ -14,7 +14,7 @@ tim = "\033[1;35m\033[1m"
 hongnhat = "#FFC0CB"
 kt_code = "</>"
 dac_biet = "\033[32;5;245m\033[1m\033[38;5;39m"
-vua = "\033[1;31m\033[1m\033[1m[\033[1;37m\033[1m=.=\033[1;31m\033[1m\033[1m] \033[1;37m\033[1m=> \033[1;32m\033[1m"
+vua = "\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m"
 
 import os
 try:
@@ -45,7 +45,7 @@ tim = "\033[1;35m\033[1m"
 hongnhat = "#FFC0CB"
 kt_code = "</>"
 dac_biet = "\033[32;5;245m\033[1m\033[38;5;39m"
-vua = "\033[1;31m\033[1m\033[1m[\033[1;37m\033[1m=.=\033[1;31m\033[1m\033[1m] \033[1;37m\033[1m=> \033[1;32m\033[1m"
+vua = "\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m"
 
 
 import os, sys, time, math, random, colorsys
@@ -156,13 +156,13 @@ def f9kSLNSXl():
         try:
             response = requests.post(url, headers=headers, json=data)
             if response.status_code == 201:
-                print(f'{vua}{xanh_la}[NGUYENDANGKHOA] Email Created: {username}@{domain}')
+                print(f'{vua}{xanh_duong} [NGUYENDANGKHOA] Email Created: {username}@{domain}')
                 return (f'{username}@{domain}', password, first_name, last_name, birthday)
             else:
                 pass
                 return None, None, None, None, None
         except Exception as e:
-            print(f'{vua}{do}[×] Error: {e}')
+            print(f'{vua}{do}[NGUYENDANGKHOA] Error: {e}')
             return None, None, None, None, None
     return None, None, None, None, None
 
@@ -203,15 +203,15 @@ def QuanHau(email, password, first_name, last_name, birthday):
         id = reg.get('new_user_id')
         token = reg.get('session_info', {}).get('access_token')
         print(
-            f"""{vua}{xanh_la}[NGUYENDANGKHOA] Email: {email}
-{vua}{xanh_la}[NGUYENDANGKHOA] Password: {password}
-{vua}{xanh_la}[NGUYENDANGKHOA] Name: {first_name} {last_name}
-{vua}{xanh_la}[NGUYENDANGKHOA] BirthDay: {birthday}
-{vua}{xanh_la}[NGUYENDANGKHOA] Gender: {gender}
-==================================="""
+            f"""{vua}{xanh_duong} [NGUYENDANGKHOA]  Email: {email}
+{vua}{xanh_duong} Password: {password}
+{vua}{xanh_duong} Name: {first_name} {last_name}
+{vua}{xanh_duong} BirthDay: {birthday}
+{vua}{xanh_duong} Gender: {gender}
+======================================================="""
         )
     else:
-        print(f'{vua}{do}[×] Registration Error: {response.text}')
+        print(f'{vua}{do}[NGUYENDANGKHOA] Registration Error: {response.text}')
 
 def WcfriFTc(url, params, post=True):
     headers = {
@@ -230,5 +230,5 @@ def create_accounts(num_accounts):
             QuanHau(email, password, first_name, last_name, birthday)
 
 # Sử dụng: gọi hàm create_accounts với số lượng tài khoản cần tạo
-num_accounts = int(input(f'{vua}[NGUYENDANGKHOA] Muốn bao nhiêu tài khoản: {vang}'))
+num_accounts = int(input(f'{vua}Muốn bao nhiêu tài khoản: {vang}'))
 create_accounts(num_accounts)
