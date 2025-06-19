@@ -384,9 +384,9 @@ def main():
 	
 	while True:
 		if os.path.exists('Cookie_FB.txt'):
-			print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập [\033[1;33m1\033[1;32m] Sử Dụng Cookie Facebook Đã Lưu ')
-			print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập [\033[1;33m2\033[1;32m] Nhập Cookie Facebook Mới')
-			chon = input('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mVui Lòng Nhập:\033[1;33m ')
+			print('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập [\033[1;33m1\033[1;32m] Sử Dụng Cookie Facebook Đã Lưu ')
+			print('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập [\033[1;33m2\033[1;32m] Nhập Cookie Facebook Mới')
+			chon = input('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mVui Lòng Nhập:\033[1;33m ')
 			if chon == '1':
 				print('\033[1;32mĐang Lấy Dữ Liệu Đã Lưu');sleep(1)
 				with open('Cookie_FB.txt', 'r') as f:
