@@ -14,7 +14,7 @@ tim = "\033[1;35m\033[1m"
 hongnhat = "#FFC0CB"
 kt_code = "</>"
 dac_biet = "\033[32;5;245m\033[1m\033[38;5;39m"
-vua = "\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m"
+vua = "\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m"
 
 import os
 try:
@@ -45,7 +45,7 @@ tim = "\033[1;35m\033[1m"
 hongnhat = "#FFC0CB"
 kt_code = "</>"
 dac_biet = "\033[32;5;245m\033[1m\033[38;5;39m"
-vua = "\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m"
+vua = "\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m"
 
 
 import os, json, sys, requests 
@@ -192,10 +192,23 @@ print(f"╚{border}╝")
 # Print transition message
 end_colors = pastel_rainbow(len(end_message), offset)
 print(center_text(gradient_line(end_message, end_colors), banner_width))
+import sys
+from time import sleep
 def banner():
-  sys.stdout.write(X)
-  sys.stdout.flush() 
-  sleep(0.00125)
+    top_banner = ""
+    top_banner += f"\033[1;37m[>_<] NGUYENDANGKHOA /// DANGKHOA_DEV...\033[0m\n"
+    bottom_banner = ""
+    bottom_banner += f"\033[1;33m╔═══════════════════════════════════════════════════════════════════╗\033[0m\n"
+    bottom_banner += f"\033[1;33m║                         TOOL TDS FULL JOB                         ║\033[0m\n"
+    bottom_banner += f"\033[1;33m╚═══════════════════════════════════════════════════════════════════╝\033[0m\n"
+    for char in top_banner:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        sleep(0.001)####################################################################################################################
+    for char in bottom_banner:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        sleep(0.001)
 class Facebook_Api (object):
 	def __init__(self, cookie):
 		self.cookie = cookie
@@ -427,7 +440,7 @@ def Nhap_Cookie():
 	i = 0
 	while True:
 		i += 1
-		cookie = input(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập Cookie Facebook Thứ: \033[1;33m{i}: ')
+		cookie = input(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập Cookie Facebook Thứ: \033[1;33m{i}: ')
 		if cookie == '' and i > 1:
 			break
 		fb = Facebook_Api(cookie)
@@ -435,7 +448,7 @@ def Nhap_Cookie():
 		if name != 0:
 			ten = name[0]
 			print('\033[1;31m────────────────────────────────────────────────────────────')
-			print(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mTên Facebook: {ten}')
+			print(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mTên Facebook: {ten}')
 			list_cookie.append(cookie)
 			print('\033[1;31m────────────────────────────────────────────────────────────')
 		else:
@@ -462,8 +475,8 @@ def main():
 			tds = TraoDoiSub_Api(token)
 			data = tds.main()
 			try:
-				print('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m" Giữ Lại Tài Khoản '+ data['user'] )
-				print('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m" Nhập Access_Token TDS Mới')
+				print('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m" Giữ Lại Tài Khoản '+ data['user'] )
+				print('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m" Nhập Access_Token TDS Mới')
 				chon = input('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;34m\033[1m"] \033[1;37m=> \033[1;32mNhập \033[1;37m===>:\033[1;33m ')
 				if chon == '2':
 					os.remove('configtds.txt')
@@ -475,7 +488,7 @@ def main():
 			except:
 				os.remove('configtds.txt')
 		if not os.path.exists('configtds.txt'):
-			token = input('\033[1;37m \033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập Access_Token TDS:\033[1;33m  ')
+			token = input('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập Access_Token TDS:\033[1;33m  ')
 			with open('configtds.txt', 'w') as f:
 				f.write(token)
 		with open('configtds.txt', 'r') as f:
@@ -495,9 +508,9 @@ def main():
 	
 	while True:
 		if os.path.exists('Cookie_FB.txt'):
-			print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập [\033[1;33m1\033[1;32m] Sử Dụng Cookie Facebook Đã Lưu ')
-			print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập [\033[1;33m2\033[1;32m] Nhập Cookie Facebook Mới')
-			chon = input('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mVui Lòng Nhập:\033[1;33m ')
+			print('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập [\033[1;33m1\033[1;32m] Sử Dụng Cookie Facebook Đã Lưu ')
+			print('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập [\033[1;33m2\033[1;32m] Nhập Cookie Facebook Mới')
+			chon = input('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mVui Lòng Nhập:\033[1;33m ')
 			if chon == '1':
 				print('\033[1;32mĐang Lấy Dữ Liệu Đã Lưu');sleep(1)
 				with open('Cookie_FB.txt', 'r') as f:
@@ -513,23 +526,23 @@ def main():
 				json.dump(list_cookie, f)
 			break
 	banner()
-	print(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mTên Tài Khoản: {user} ')
-	print(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mXu Hiện Tại: {xu}')
-	print(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mXu Bị Phạt: {xudie} ')
-	print(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mSố Cookie: {len(list_cookie)} ')
+	print(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mTên Tài Khoản: {user} ')
+	print(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mXu Hiện Tại: {xu}')
+	print(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mXu Bị Phạt: {xudie} ')
+	print(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mSố Cookie: {len(list_cookie)} ')
 	print('\033[1;31m────────────────────────────────────────────────────────────')
 	print('\033[1;32m[1 : LIKE — 2 : COMMENT — 3 : SHARE — 4 : REACTION]')
 	print('\033[1;32m[5 : FOLLOW — 6 : PAGE — 7 : REACTCMT —  8 : GROUP]')
 	print('\033[1;31m────────────────────────────────────────────────────────────')
-	print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mCó Thể Chọn Nhiều Nhiệm Vụ (Ví Dụ 123...)')
-	nhiemvu = input ('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập Số Để Chạy Nhiệm Vụ: ')
-	delaymin = int(input('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập Delay Min: '))
-	delaymax = int(input('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mNhập Delay Max: '))
-	print('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mSau ____ Nhiệm Vụ Thì Kích Hoạt Chống Block.',end='\r')
-	nvblock = int(input('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mSau '))
-	print(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mSau {nvblock} Nhiệm Vụ Nghỉ Ngơi ____ Giây       ',end='\r')
-	delaybl = int(input(f'\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mSau {nvblock} Nhiệm Vụ Nghỉ Ngơi '))
-	doinick = int(input('\033[1;31m[\033[1;37m=.=\033[1;31m] \033[1;37m=> \033[1;32mSau Bao Nhiêu Nhiệm Vụ Thì Đổi Nick: '))
+	print('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mCó Thể Chọn Nhiều Nhiệm Vụ (Ví Dụ 123...)')
+	nhiemvu = input ('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập Số Để Chạy Nhiệm Vụ: ')
+	delaymin = int(input('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập Delay Min: '))
+	delaymax = int(input('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mNhập Delay Max: '))
+	print('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mSau ____ Nhiệm Vụ Thì Kích Hoạt Chống Block.',end='\r')
+	nvblock = int(input('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mSau '))
+	print(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=>\033[1;32mSau {nvblock} Nhiệm Vụ Nghỉ Ngơi ____ Giây       ',end='\r')
+	delaybl = int(input(f'\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mSau {nvblock} Nhiệm Vụ Nghỉ Ngơi '))
+	doinick = int(input('\033[1;37m[>_<]\033[1;37m \033[1;37mNGUYENDANGKHOA\033[1;37m \033[1;37m=> \033[1;32mSau Bao Nhiêu Nhiệm Vụ Thì Đổi Nick: '))
 	print('\033[1;31m────────────────────────────────────────────────────────────')
 	while True:
 		if len(list_cookie) == 0:
